@@ -17,39 +17,15 @@ export default function HotelApp() {
   const [answer, setAnswer] = useState("")
 
   const [response, setResponse] = useState(null)
-
-  // const handleAskQuestion = () => {
-  //   setAnswer("Lo siento, la IA está en mantenimiento. Por favor, contacte a recepción para cualquier consulta.")
-  // }
-
-  // const handleAskQuestion = async () => {
-  //   try{
-  //     const response = await fetch("http://localhost:3000/chat", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify(
-  //         {
-  //           prompt: question
-  //         }
-  //       )
-  //     })
-      
-  //     const data = await response.json()
-  //     setAnswer(data.response)
-
-  //   }catch(e){
-  //     console.log(e)
-  //     setAnswer("La IA se encuentra en mantenimiento, rogamos que nos disculpen. Pongase en contacto con el recepcionista")
-  //   }
-  // }
+  const [loading, setLoading] = useState(false)
 
   const handleAskQuestion = async () => {
+    setLoading(true)
+    try {
       const res = await fetch('http://localhost:3000/chat', {
         method: 'POST',
         body: JSON.stringify({
-          prompt: question 
+          prompt: question
         }),
         headers: {
           "Content-Type": "application/json"
@@ -59,7 +35,13 @@ export default function HotelApp() {
       const data = await res.json()
       setResponse(data.response)
       setAnswer(data.response[0]?.generated_text || "")
+    } catch (e) {
+      console.log("Ha ocurrido un error: ", e)
+      setAnswer("Actualmente la IA se encuentra en mantenimiento, rogamos que nos disculpen")
+    } finally {
+      setLoading(false)
     }
+  }
 
 
   return (
@@ -140,11 +122,17 @@ export default function HotelApp() {
                   <Button onClick={handleAskQuestion} className="w-full">
                     <MessageSquare className="mr-2 h-4 w-4" /> Preguntar
                   </Button>
-                  {answer && (
-                    <div className="mt-4 p-4 bg-green-400 rounded-md">
-                      <p className="font-semibold">Respuesta:</p>
-                      <p>{answer}</p>
+                  {loading ? (
+                    <div className="mt-4 p-4 bg-yellow-200 rounded-md">
+                      <p className="font-semibold">Cargando...</p>
                     </div>
+                  ) : (
+                    answer && (
+                      <div className="mt-4 p-4 bg-green-400 rounded-md">
+                        <p className="font-semibold">Respuesta:</p>
+                        <p>{answer}</p>
+                      </div>
+                    )
                   )}
                 </CardContent>
               </Card>
