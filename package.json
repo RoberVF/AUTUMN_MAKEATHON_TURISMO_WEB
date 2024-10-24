@@ -1,0 +1,22 @@
+{
+  "name": "autumn_makeathon_web",
+  "version": "1.0.0",
+  "description": "Proyecto elaborado para usar la IA de openai desde javascript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "Roberto Morales Fumero",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7",
+    "openai": "^4.68.4"
+  }
+}
