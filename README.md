@@ -53,7 +53,7 @@ Para usar este repositorio, tan solo tendremos que realizar una instalacion basi
    npm i
    npm run dev
    ```
-En otra terminal en la ruta / del proyecto:
+En otra terminal en la ruta client/ del proyecto:
   ```bash
   npm i
   npm run dev
