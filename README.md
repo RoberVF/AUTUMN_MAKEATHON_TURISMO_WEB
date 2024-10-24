@@ -61,6 +61,9 @@ En otra terminal en la ruta client/ del proyecto:
 
 La aplicacion tendra el servidor de nodejs corriendo en el puerto 3000, la base de datos en 27017 y el cliente en 5173.
 
+Una vez hecho esto, podrá acceder a la aplicación completa en:
+***http://localhost:5173***
+
 ## Contribuciones
 Si deseas contribuir a este proyecto, por favor abre un issue o un pull request.
 
