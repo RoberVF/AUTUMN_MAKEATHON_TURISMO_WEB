@@ -9,9 +9,14 @@ export const generateResponse = async (req, res) => {
     try {
         const { prompt } = req.body
 
-        const response = await axios.post('https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B',
+        const response = await axios.post('https://api-inference.huggingface.co/models/EleutherAI/gpt-j-6B',
             { 
-                inputs: prompt 
+                inputs: prompt, 
+                parameters: {
+                    max_length: 100,
+                    temperature: 1,
+                    top_k: 50
+                }
             },
             {
                 headers: {
