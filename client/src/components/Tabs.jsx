@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, { useState, useContext } from 'react'
 
 const Tabs = ({ defaultValue, ...props }) => {
     const [activeTab, setActiveTab] = useState(defaultValue)
