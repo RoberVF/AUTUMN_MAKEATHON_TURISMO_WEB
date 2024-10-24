@@ -3,91 +3,14 @@
 import React, { useState } from "react"
 import { Calendar, MapPin, MessageSquare } from "lucide-react"
 
-// Componente Button
-const Button = React.forwardRef(({ className, ...props }, ref) => {
-  return (
-    <button
-      className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ${className}`}
-      ref={ref}
-      {...props}
-    />
-  )
-})
-Button.displayName = "Button"
+import Button from './components/Button'
+import Input from './components/Input'
+import CardComponents from './components/Card'
+const {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} = CardComponents
 
-// Componente Input
-const Input = React.forwardRef(({ className, type, ...props }, ref) => {
-  return (
-    <input
-      type={type}
-      className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
-      ref={ref}
-      {...props}
-    />
-  )
-})
-Input.displayName = "Input"
+import TabsComponents from './components/Tabs'
+const { Tabs, TabsList, TabsTrigger, TabsContent, TabsContext } = TabsComponents
 
-// Componente Card y subcomponentes
-const Card = ({ className, ...props }) => (
-  <div className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`} {...props} />
-)
-Card.displayName = "Card"
-
-const CardHeader = ({ className, ...props }) => (
-  <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props} />
-)
-CardHeader.displayName = "CardHeader"
-
-const CardTitle = ({ className, ...props }) => (
-  <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`} {...props} />
-)
-CardTitle.displayName = "CardTitle"
-
-const CardDescription = ({ className, ...props }) => (
-  <p className={`text-sm text-muted-foreground ${className}`} {...props} />
-)
-CardDescription.displayName = "CardDescription"
-
-const CardContent = ({ className, ...props }) => (
-  <div className={`p-6 pt-0 ${className}`} {...props} />
-)
-CardContent.displayName = "CardContent"
-
-const CardFooter = ({ className, ...props }) => (
-  <div className={`flex items-center p-6 pt-0 ${className}`} {...props} />
-)
-CardFooter.displayName = "CardFooter"
-
-// Componente Tabs y subcomponentes
-const Tabs = ({ defaultValue, ...props }) => {
-  const [activeTab, setActiveTab] = useState(defaultValue)
-  return <div {...props} data-active-tab={activeTab} />
-}
-
-const TabsList = ({ className, ...props }) => (
-  <div className={`inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground ${className}`} {...props} />
-)
-
-const TabsTrigger = ({ value, className, ...props }) => {
-  const isActive = React.useContext(TabsContext) === value
-  return (
-    <button
-      className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm ${className}`}
-      {...props}
-    />
-  )
-}
-
-const TabsContent = ({ value, className, ...props }) => {
-  const activeTab = React.useContext(TabsContext)
-  if (activeTab !== value) return null
-  return <div className={`mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${className}`} {...props} />
-}
-
-const TabsContext = React.createContext(null)
-
-// Componente principal HotelApp
 export default function HotelApp() {
   const [activeTab, setActiveTab] = useState("check-in")
   const [question, setQuestion] = useState("")
@@ -153,9 +76,9 @@ export default function HotelApp() {
                 <CardDescription>Haga cualquier pregunta sobre el hotel o su estancia.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Input 
-                  placeholder="Escriba su pregunta aquí" 
-                  value={question} 
+                <Input
+                  placeholder="Escriba su pregunta aquí"
+                  value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                 />
                 <Button onClick={handleAskQuestion} className="w-full">
