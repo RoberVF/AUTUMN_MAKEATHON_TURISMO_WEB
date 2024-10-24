@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Calendar, MapPin, MessageSquare } from "lucide-react"
 
 import Button from './components/Button'
@@ -16,9 +16,51 @@ export default function HotelApp() {
   const [question, setQuestion] = useState("")
   const [answer, setAnswer] = useState("")
 
-  const handleAskQuestion = () => {
-    setAnswer("Lo siento, la IA está en mantenimiento. Por favor, contacte a recepción para cualquier consulta.")
-  }
+  const [response, setResponse] = useState(null)
+
+  // const handleAskQuestion = () => {
+  //   setAnswer("Lo siento, la IA está en mantenimiento. Por favor, contacte a recepción para cualquier consulta.")
+  // }
+
+  // const handleAskQuestion = async () => {
+  //   try{
+  //     const response = await fetch("http://localhost:3000/chat", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(
+  //         {
+  //           prompt: question
+  //         }
+  //       )
+  //     })
+      
+  //     const data = await response.json()
+  //     setAnswer(data.response)
+
+  //   }catch(e){
+  //     console.log(e)
+  //     setAnswer("La IA se encuentra en mantenimiento, rogamos que nos disculpen. Pongase en contacto con el recepcionista")
+  //   }
+  // }
+
+  const handleAskQuestion = async () => {
+      const res = await fetch('http://localhost:3000/chat', {
+        method: 'POST',
+        body: JSON.stringify({
+          prompt: question 
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      const data = await res.json()
+      setResponse(data.response)
+      setAnswer(data.response[0]?.generated_text || "")
+    }
+
 
   return (
     <div className="h-screen bg-zinc-200">
@@ -99,7 +141,7 @@ export default function HotelApp() {
                     <MessageSquare className="mr-2 h-4 w-4" /> Preguntar
                   </Button>
                   {answer && (
-                    <div className="mt-4 p-4 bg-red-400 rounded-md">
+                    <div className="mt-4 p-4 bg-green-400 rounded-md">
                       <p className="font-semibold">Respuesta:</p>
                       <p>{answer}</p>
                     </div>
