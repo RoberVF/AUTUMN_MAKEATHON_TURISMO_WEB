@@ -6,7 +6,7 @@ Esta aplicación ha sido desarrollada para la **AUTUMN MAKEATHON** de la **Funda
 Koala Garden's Hotel es una aplicación web interactiva diseñada para mejorar la experiencia del cliente en el hotel. Los usuarios pueden realizar check-in, acceder a información sobre sus habitaciones y hacer preguntas a una inteligencia artificial para obtener respuestas rápidas sobre su estancia.
 
 ## Motivos e inconvenientes
-Originalmente, se pensó en desarrollar la aplicación en **Python** [repositorio de GitHub de la primera idea en Python](https://github.com/RoberVF/AUTUMN_MAKEATHON_TURISMO), pero tras realizar algunas pruebas, nos dimos cuenta de que la Raspberry Pi (el dispositivo que íbamos a utilizar para ejecutar la aplicación) tenía recursos limitados para correr en local la IA utilizada. Por ello, decidimos cambiar a **Node.js**, corriendo el servidor en local y realizando peticiones a la API de **Hugging Face** para renderizar las respuestas en servidores externos.
+Originalmente, se pensó en desarrollar la aplicación en **Python** [repositorio de GitHub de la primera idea en Python](https://github.com/RoberVF/AUTUMN_MAKEATHON_TURISMO), pero tras realizar algunas pruebas, nos dimos cuenta de que la Raspberry Pi (el dispositivo que íbamos a utilizar para ejecutar la aplicación) tenía recursos limitados para correr en local la IA utilizada. Por ello, decidimos cambiar a **Node.js**, corriendo el servidor en local en lugar de la IA y realizando peticiones a la API de **Hugging Face** para renderizar las respuestas en servidores externos.
 
 
 ## Tecnologías Utilizadas
